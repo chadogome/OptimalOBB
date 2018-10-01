@@ -1,4 +1,4 @@
-function [Vopt,Ropt] = oRourke7m(Xname)
+function [Vopt,Ropt] = exactORourke(Xname)
 
 if ((nargin == 1) && ischar(Xname) && strcmp(Xname, 'VersionCheck42')),
     disp('O''Rourke v7m SS Matlab');
@@ -54,7 +54,7 @@ try
     hullNodes = nodeToFaces(hullFaces, X);
     hullNormals = zeros(size(hullFaces,1), 3);
     for k=1:size(hullNormals, 1)
-    hullNormals(k,:) = -normalToFaces(hullFaces(k, :), X);
+        hullNormals(k,:) = -normalToFaces(hullFaces(k, :), X);
     end
     i0 = 2;
     j0 = 1;
@@ -522,12 +522,13 @@ function hullNodes = nodeToFaces(hullFaces,X)
 hullNodes = cell( max(hullFaces(:)),1);
 for k=1:3*size(hullFaces,1),
     if mod(k,3) == 1
-    face = hullFaces(ceil(k/3),:);
-    center = mean(X(face,:));
-    normal = -normalToFaces(face,X);
+        face = hullFaces(ceil(k/3),:);
+        center = mean(X(face,:));
+        normal = -normalToFaces(face,X);
     end
     newNode = face(1+mod(k-1,3));
     faces = hullNodes{newNode};
+    l = [];
     for l=1:length(faces),
         center_l = mean(X(hullFaces(faces(l),:),:));
         if crossNorm(center-X(newNode,:),center_l-X(newNode,:))*mean([normal;-normalToFaces(hullFaces(faces(l),:),X)])'> 0,
