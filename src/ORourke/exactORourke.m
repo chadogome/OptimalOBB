@@ -16,7 +16,7 @@ if ((nargin < 1) || ~ischar(Xname) || (exist(Xname, 'file') ~= 2)),
     disp('Vopt = Minimal OBB volume of the set of points (tolerance = 1e-9).');
     disp('Ropt = Rotation matrix associated to the optimal OBB.');
     disp(' ');
-    disp('Bugs and errors can be reported to `samuel.melchior@epfl.ch`.');
+    disp('Bugs and errors can be reported on https://github.com/chagome/OptimalOBB/issues.');
     Vopt = [];
     Ropt = [];
     return;
@@ -35,7 +35,7 @@ catch me,
     disp('Vopt = Minimal OBB volume of the set of points (tolerance = 1e-9).');
     disp('Ropt = Rotation matrix associated to the optimal OBB.');
     disp(' ');
-    disp('Bugs and errors can be reported to samuel.melchior@epfl.ch.');
+    disp('Bugs and errors can be reported on https://github.com/chagome/OptimalOBB/issues.');
     Vopt = [];
     Ropt = [];
     return;
@@ -364,7 +364,7 @@ try
 catch me,
     Vopt = [];
     Ropt = [];
-    disp('An unexpected error has occured. Please report this to samuel.melchior@epfl.ch with the datafile.');
+    disp('An unexpected error has occured. Please report this on https://github.com/chagome/OptimalOBB/issues with the datafile.');
 end
 
 
