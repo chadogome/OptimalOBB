@@ -1,0 +1,19 @@
+function [Ropt,Vopt] = gottschalk(X)
+K = convhulln(X);
+N = length(K);
+A = zeros(N,1);
+c = zeros(N,3);
+terms = zeros(N,3,3);
+for i=1:N
+    X_i = X(K(i,:),:);
+    A(i) = 0.5*norm(cross(X_i(1,:)-X_i(2,:),X_i(1,:)-X_i(3,:)));
+    c(i,:) = mean(X_i);
+    terms(i,:,:) = A(i)*(9*c(i,:)'*c(i,:)+X_i(1,:)'*X_i(1,:)+X_i(2,:)'*X_i(2,:)+X_i(3,:)'*X_i(3,:));
+end
+Aall = sum(A);
+cAll = sum((A*[1 1 1]).*c)/Aall;
+covariance = [sum(terms(:,:,1))' sum(terms(:,:,2))' sum(terms(:,:,3))']/(12*Aall) - cAll'*cAll;
+[eigVec,eigVal] = eig(covariance);
+Ropt = eigVec';
+X_Ropt = X*Ropt';
+Vopt = prod(max(X_Ropt) - min(X_Ropt));
