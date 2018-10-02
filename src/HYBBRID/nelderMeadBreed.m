@@ -24,9 +24,9 @@ function newpop = nelderMeadBreed(pop, fitness, fit_fun, data, params)
 %    HYBBRID, nelderMead
 %
 % AUTHORS:
-%    Chia-Tche Chang <chia-tche.chang@uclouvain.be>
-%    Bastien Gorissen <bastien.gorissen@cenaero.be>
-%    Samuel Melchior <samuel.melchior@uclouvain.be>
+%    Chia-Tche Chang <cchang.uclouvain@gmail.com>
+%    Bastien Gorissen <bastien@panopticgame.com>
+%    Samuel Melchior <samuel.melchior@epfl.ch>
 %
 % REFERENCES:
 %    - C.-T.Chang, B.Gorissen, S.Melchior, 
