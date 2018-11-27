@@ -373,6 +373,26 @@ function c = cross(a,b)
 
 c = a(:, [2 3 1]).*b(:, [3 1 2]) - a(:, [3 1 2]).*b(:, [2 3 1]);
 
+function nodes = findEquivalentExtrema(normal,todo,allFaces,allNodes,X,tol,prev)
+
+init = false(size(allNodes, 1), 1);
+key = 1:size(allNodes, 1);
+done = init;
+done(todo) = 1;
+keep = done;
+done(prev) = 1;
+limit = X(todo,:)*normal'-tol*max(abs(X(todo,:)*normal'),1);
+while ~isempty(todo),
+    tocheck = allFaces(cell2mat(allNodes(todo)'), :);
+    processing = init;
+    processing(tocheck) = 1;
+    processing = key(processing & ~done);
+    todo = processing(X(processing,:)*normal' >= limit);
+    keep(todo) = 1;
+    done(processing) = 1;
+end
+nodes = key(keep);
+
 function [phi, R_x, theta1_min, theta1_max, rc] = computeTheta(e1, e2, tol, normal1, normal2, mean_normal1)
 
 % Computation of the frame axes and angle

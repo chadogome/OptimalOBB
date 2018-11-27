@@ -15,6 +15,7 @@ for k=1:3*size(hullFaces,1)
     end
     newNode = face(1+mod(k-1,3));
     faces = hullNodes{newNode};
+    l = [];
     for l=1:length(faces)
         center_l = mean(X(hullFaces(faces(l),:),:));
         if crossNorm(center-X(newNode,:),center_l-X(newNode,:))*mean([normal;-normalToFaces(hullFaces(faces(l),:),X)])'> 0 %normal' < 0
